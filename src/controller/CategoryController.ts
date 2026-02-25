@@ -45,7 +45,6 @@ export class CategoryController {
 
   static async remove(req: Request, res: Response, next: NextFunction) {
     try {
-      // Prevent deletion if products reference this category
       const count = await Product.countDocuments({ category: req.params.id });
       if (count > 0) {
         return res.status(409).json({
